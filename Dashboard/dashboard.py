@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load dataset
-
-df_hour = pd.read_csv(r"Data/hour.csv")
-df_day = pd.read_csv(r"Data/day.csv")
+df_hour = pd.read_csv("Data/hour.csv")
+df_day = pd.read_csv("Data/day.csv")
 
 # Sidebar
 st.sidebar.title("Dashboard Penyewaan Sepeda")
