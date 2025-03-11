@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load dataset
-main_data = pd.read_csv("main_data.csv")
+main_data = pd.read_csv("Dashboard\main_data.csv")
 
 # Pisahkan menjadi dua DataFrame: df_day dan df_hour
 df_day = main_data[main_data['dteday'].notna()]
@@ -72,7 +72,6 @@ if option == "Data Berdasarkan Kondisi Alam":
         st.pyplot(fig)
 
         st.write("Grafik tersebut menunjukkan hubungan antara jumlah penyewa sepeda dengan kondisi cuaca berdasarkan musim. Terlihat bahwa kondisi cuaca 'Cerah / Berawan Tipis' memiliki jumlah penyewa tertinggi di semua musim, menunjukkan bahwa pengguna cenderung menyewa sepeda ketika cuaca mendukung. Kondisi 'Berkabut / Berawan' juga menunjukkan jumlah penyewa yang cukup tinggi, meskipun tidak setinggi cuaca cerah, menandakan bahwa sedikit awan tidak menghalangi aktivitas penyewaan. Sebaliknya, kondisi 'Salju Ringan / Hujan Ringan' memiliki jumlah penyewa yang sangat rendah di semua musim, yang mungkin disebabkan oleh ketidaknyamanan bersepeda dalam cuaca buruk. Perbandingan antar musim menunjukkan bahwa musim tertentu (terutama musim 2 dan 3) memiliki jumlah penyewa yang lebih tinggi, mengindikasikan bahwa suhu yang lebih hangat atau cuaca yang lebih baik lebih menarik bagi pengguna. Secara keseluruhan, grafik ini memperlihatkan bahwa cuaca cerah sangat memengaruhi peningkatan aktivitas penyewaan sepeda, sementara cuaca buruk mengurangi jumlah penyewa secara signifikan.")
-
 
 elif option == "Data Berdasarkan Kondisi Waktu":
     st.subheader("Penyewaan Sepeda Berdasarkan Jam")
