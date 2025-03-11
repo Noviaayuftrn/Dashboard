@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load dataset
-df_hour = pd.read_csv("Data/hour.csv")
-df_day = pd.read_csv("Data/day.csv")
+main_data = pd.read_csv("main_data.csv")
+
+# Pisahkan menjadi dua DataFrame: df_day dan df_hour
+df_day = main_data[main_data['dteday'].notna()]
+df_hour = main_data[main_data['hr'].notna()]
 
 # Sidebar
 st.sidebar.title("Dashboard Penyewaan Sepeda")
