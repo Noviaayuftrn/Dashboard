@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load dataset
-main_data = pd.read_csv("Dashboard\main_data.csv")
+main_data = pd.read_csv("Dashboard/main_data.csv")
 
 # # Pisahkan menjadi dua DataFrame: df_day dan df_hour
 # df_day = main_data[main_data['dteday'].notna()]
