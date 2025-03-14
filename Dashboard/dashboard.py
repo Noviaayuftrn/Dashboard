@@ -6,9 +6,9 @@ import seaborn as sns
 # Load dataset
 main_data = pd.read_csv("Dashboard\main_data.csv")
 
-# Pisahkan menjadi dua DataFrame: df_day dan df_hour
-df_day = main_data[main_data['dteday'].notna()]
-df_hour = main_data[main_data['hr'].notna()]
+# # Pisahkan menjadi dua DataFrame: df_day dan df_hour
+# df_day = main_data[main_data['dteday'].notna()]
+# df_hour = main_data[main_data['hr'].notna()]
 
 # Sidebar
 st.sidebar.title("Dashboard Penyewaan Sepeda")
@@ -33,22 +33,26 @@ if option == "Data Berdasarkan Kondisi Alam":
     analysis_option = st.selectbox("Pilih Grafik yang Ingin Ditampilkan:", ["Jumlah Penyewa vs Suhu", "Jumlah Penyewa vs Kelembapan", "Jumlah Penyewa vs Kondisi Cuaca"])
 
     if analysis_option == "Jumlah Penyewa vs Suhu":
-        fig, ax = plt.subplots(figsize=(6, 5))
-        sns.regplot(x='temp', y='cnt', data=df_day, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red'}, ax=ax)
+        fig, ax = plt.subplots(figsize=(8, 5))
+        sns.set(style='whitegrid')
+        sns.regplot(x='temp', y='cnt', data=main_data, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red'}, ax=ax)
         ax.set_title("Jumlah Penyewa vs Suhu")
         ax.set_xlabel("Suhu (temp)")
         ax.set_ylabel("Jumlah Penyewa (cnt)")
+        plt.grid(True)
         st.pyplot(fig)
 
         st.write("Grafik ini menunjukkan hubungan antara suhu udara dan jumlah penyewa sepeda. "
                  "korelasi antara penyewa dan kondisi suhu adalah jika kondisi suhu tinggi (> 0.5) maka jumlah penyewa meningkat.")
 
     elif analysis_option == "Jumlah Penyewa vs Kelembapan":
-        fig, ax = plt.subplots(figsize=(6, 5))
-        sns.regplot(x='hum', y='cnt', data=df_day, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red'}, ax=ax)
+        fig, ax = plt.subplots(figsize=(8, 5))
+        sns.set(style='whitegrid')
+        sns.regplot(x='hum', y='cnt', data=main_data, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red'}, ax=ax)
         ax.set_title("Jumlah Penyewa vs Kelembapan")
         ax.set_xlabel("Kelembapan (hum)")
         ax.set_ylabel("Jumlah Penyewa (cnt)")
+        plt.grid(True)
         st.pyplot(fig)
 
         st.write("Grafik ini menggambarkan dampak kelembapan terhadap jumlah penyewa sepeda. "
@@ -61,10 +65,10 @@ if option == "Data Berdasarkan Kondisi Alam":
             3: 'Salju Ringan / Hujan Ringan',
             4: 'Hujan Lebat / Kabut Salju'
         }
-        df_day['weather_desc'] = df_day['weathersit'].map(weather_mapping)
+        main_data['weather_desc'] = main_data['weathersit'].map(weather_mapping)
 
         fig, ax = plt.subplots(figsize=(10, 6))
-        sns.barplot(x='weather_desc', y='cnt', data=df_day, estimator=sum, hue='season', palette='viridis', ax=ax)
+        sns.barplot(x='weather_desc', y='cnt', data=main_data, estimator=sum, hue='season', palette='viridis', ax=ax)
         ax.set_title('Jumlah Penyewa Berdasarkan Kondisi Cuaca')
         ax.set_xlabel('Kondisi Cuaca')
         ax.set_ylabel('Total Jumlah Penyewa (cnt)')
@@ -76,7 +80,7 @@ if option == "Data Berdasarkan Kondisi Alam":
 elif option == "Data Berdasarkan Kondisi Waktu":
     st.subheader("Penyewaan Sepeda Berdasarkan Jam")
     fig, ax = plt.subplots(figsize=(10, 5))
-    sns.lineplot(x="hr", y="cnt", data=df_hour, marker="o", color="red", ax=ax)
+    sns.lineplot(x="hr", y="cnt", data=main_data, marker="o", color="red", ax=ax)
 
     ax.set_title('Penyewaan Sepeda Berdasarkan Jam')
     ax.set_xlabel('Jam')
